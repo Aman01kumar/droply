@@ -21,7 +21,7 @@ export const files = pgTable("files", {
     parentId : uuid("parent_id"),
 
     // file/folder flags
-    isFolder : boolean("is-folder").default(false).notNull(),
+    isFolder : boolean("is_folder").default(false).notNull(),
     isStarred : boolean("is_starred").default(false).notNull(),
     isTrash : boolean("is_trash").default(false).notNull(),
 
@@ -42,11 +42,8 @@ export const filesRelations = relations(files, ({one, many}) =>
     references: [files.id]
    }),
    children: many(files) 
-}))
+}));
 
 // Type definations 
-export const File = typeof files.$inferSelect;
-export const NewFile = typeof files.$inferInsert;
-
-
-
+export type File = typeof files.$inferSelect;
+export type NewFile = typeof files.$inferInsert;
